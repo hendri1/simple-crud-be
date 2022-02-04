@@ -94,3 +94,19 @@ export const update = (product: IProduct, callback: (error: Error, data?: unknow
     }
   );
 };
+
+export const remove = (id: number, callback: (error: Error, data?: unknown) => void): void => {
+  const queryString = "DELETE FROM Product WHERE id = ?";
+
+  conn.query(
+    queryString,
+    [id],
+    (err) => {
+      if (err) {
+        callback(err)
+      }
+
+      callback(null);
+    }
+  );
+};

@@ -45,5 +45,15 @@ productRouter.put("/:id", async (req: Request, res: Response) => {
   });
 });
 
+productRouter.delete("/:id", async (req: Request, res: Response) => {
+  productController.remove(req, (err: Error) => {
+    if (err) {
+      return res.status(500).json({"errorMessage": err.message});
+    }
+
+    res.status(200).send();
+  });
+});
+
 export { productRouter };
 

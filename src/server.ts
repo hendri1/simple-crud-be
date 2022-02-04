@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import express, { Request, Response } from "express";
+import multer from "multer";
 import cors from "cors";
 import helmet from "helmet";
 
@@ -20,6 +21,8 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(multer().any());
 
 app.get("/", (req: Request, res: Response) => res.send("Express + TypeScript Server"));
 app.use("/product", productRouter);

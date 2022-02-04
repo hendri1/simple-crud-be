@@ -42,3 +42,13 @@ export const update = async (req: Request, callback: (error: Error, data?: unkno
     callback(null);
   });
 };
+
+export const remove = async (req: Request, callback: (error: Error, data?: unknown) => void): Promise<void> => {
+  const productId = Number(req.params.id);
+
+  productModel.remove(productId, (err: Error) => {
+    if (err) callback(err);
+
+    callback(null);
+  });
+};
