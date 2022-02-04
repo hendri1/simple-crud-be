@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 RUN yarn
+RUN yarn clean
 RUN yarn build
 
 EXPOSE 8000

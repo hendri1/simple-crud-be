@@ -8,6 +8,8 @@ import { productRouter } from "@/routes/product";
 dotenv.config();
 
 if (!process.env.PORT) {
+  console.log("there are some missing env");
+  if (!process.env.PORT) console.log(`process.env.PORT = ${process.env.PORT}`);
   process.exit(1);
 }
 
@@ -21,7 +23,6 @@ app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => res.send("Express + TypeScript Server"));
 app.use("/product", productRouter);
-
 
 app.listen(PORT, () => {
   console.log(`Server is running at https://localhost:${PORT}`);
