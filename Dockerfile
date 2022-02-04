@@ -8,4 +8,4 @@ RUN yarn
 RUN yarn build
 
 EXPOSE 8000
-CMD [ "node", "-r ts-node/regsiter/transpile-only", "-r tsconfig-paths/register", "dist/server.js" ]
+CMD [ "yarn", "start:prod" ]
