@@ -1,9 +1,9 @@
 import { Request } from "express";
 
-import * as productModel from "../../models/product";
-import { IProduct, IProductDetail } from "../../types/product";
+import * as productModel from "@/models/product";
+import { IProduct, IProductDetail } from "@/types/product";
 
-export const create = async (req: Request, callback: Function) => {
+export const create = async (req: Request, callback: (error: Error, data?: unknown) => void): Promise<void> => {
   const newProduct: IProductDetail = req.body;
   productModel.create(newProduct, (err: Error, id: number) => {
     if (err) callback(err);
@@ -12,7 +12,7 @@ export const create = async (req: Request, callback: Function) => {
   });
 };
 
-export const findAll = async (callback: Function) => {
+export const findAll = async (callback: (error: Error, data?: unknown) => void): Promise<void> => {
   productModel.findAll((err: Error, products: IProduct[]) => {
     if (err) callback(err);
 
@@ -20,8 +20,8 @@ export const findAll = async (callback: Function) => {
   });
 };
 
-export const findOne = async (req: Request, callback: Function) => {
-  const productId: number = Number(req.params.id);
+export const findOne = async (req: Request, callback: (error: Error, data?: unknown) => void): Promise<void> => {
+  const productId = Number(req.params.id);
   productModel.findOne(productId, (err: Error, product: IProduct) => {
     if (err) callback(err);
 
@@ -29,8 +29,8 @@ export const findOne = async (req: Request, callback: Function) => {
   });
 };
 
-export const update = async (req: Request, callback: Function) => {
-  const productId: number = Number(req.params.id);
+export const update = async (req: Request, callback: (error: Error, data?: unknown) => void): Promise<void> => {
+  const productId = Number(req.params.id);
   const updateProduct: IProductDetail = req.body;
 
   productModel.update({

@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 
-import * as productController from "../../controllers/product";
-import { IProduct } from "../../types/product";
+import * as productController from "@/controllers/product";
+import { IProduct } from "@/types/product";
 
 const productRouter = Router();
 
@@ -36,7 +36,7 @@ productRouter.get("/:id", async (req: Request, res: Response) => {
 });
 
 productRouter.put("/:id", async (req: Request, res: Response) => {
-  productController.update(req, (err: Error, id: number) => {
+  productController.update(req, (err: Error) => {
     if (err) {
       return res.status(500).json({"errorMessage": err.message});
     }

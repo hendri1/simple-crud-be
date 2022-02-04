@@ -1,9 +1,9 @@
-import { IProduct, IProductDetail } from "../../types/product";
-import { conn } from "../../connection";
+import { IProduct, IProductDetail } from "@/types/product";
+import { conn } from "@/connection";
 
 import { OkPacket, RowDataPacket } from "mysql2";
 
-export const create = (product: IProductDetail, callback: Function) => {
+export const create = (product: IProductDetail, callback: (error: Error, data?: unknown) => void): void => {
   const queryString = "INSERT INTO Product (name, description) VALUES (?, ?)"
 
   conn.query(
@@ -13,7 +13,9 @@ export const create = (product: IProductDetail, callback: Function) => {
       product.description,
     ],
     (err, result) => {
-      if (err) {callback(err)};
+      if (err) {
+        callback(err)
+      }
 
       const insertId = (<OkPacket> result).insertId;
       callback(null, insertId);
@@ -21,14 +23,16 @@ export const create = (product: IProductDetail, callback: Function) => {
   );
 };
 
-export const findOne = (productId: number, callback: Function) => {
+export const findOne = (productId: number, callback: (error: Error, data?: unknown) => void): void => {
   const queryString = "SELECT * FROM Product WHERE id = ?";
 
   conn.query(
     queryString,
     productId,
     (err, result) => {
-      if (err) {callback(err)};
+      if (err) {
+        callback(err)
+      }
 
       const row = (<RowDataPacket> result)[0];
       const product: IProduct =  {
@@ -42,13 +46,15 @@ export const findOne = (productId: number, callback: Function) => {
   );
 };
 
-export const findAll = (callback: Function) => {
+export const findAll = (callback: (error: Error, data?: unknown) => void): void => {
   const queryString = "SELECT * FROM Product";
 
   conn.query(
     queryString,
     (err, result) => {
-      if (err) {callback(err)};
+      if (err) {
+        callback(err)
+      }
 
       const rows = <RowDataPacket[]> result;
       const products: IProduct[] = [];
@@ -69,7 +75,7 @@ export const findAll = (callback: Function) => {
   );
 };
 
-export const update = (product: IProduct, callback: Function) => {
+export const update = (product: IProduct, callback: (error: Error, data?: unknown) => void): void => {
   const queryString = "UPDATE Product SET name=?, description=? WHERE id = ?";
 
   conn.query(
@@ -80,7 +86,9 @@ export const update = (product: IProduct, callback: Function) => {
       product.id,
     ],
     (err) => {
-      if (err) {callback(err)};
+      if (err) {
+        callback(err)
+      }
 
       callback(null);
     }

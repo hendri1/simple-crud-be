@@ -2,12 +2,18 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "baseUrl": "./",
     "rootDir": "./",
-    "outDir": "./build",
+    "outDir": "./dist",
+    "paths": {
+      "@/*": ["src/*"],
+    },
     "esModuleInterop": true,
-    "strict": true
+    "sourceMap": true,
   },
+  "lib": ["es2015"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

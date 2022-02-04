@@ -1,10 +1,9 @@
 import * as dotenv from "dotenv";
-import bodyParser from "body-parser";
 import express, { Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 
-import { productRouter } from "./routes/product";
+import { productRouter } from "@/routes/product";
 
 dotenv.config();
 
@@ -18,7 +17,7 @@ const app = express();
 
 app.use(helmet());
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => res.send("Express + TypeScript Server"));
 app.use("/product", productRouter);
